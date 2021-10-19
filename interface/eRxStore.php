@@ -152,9 +152,22 @@ class eRxStore
 				AND erx_uploaded = \'0\'
 				AND (
 					enddate is NULL
-					OR enddate = \'\'
 					OR enddate = \'0000-00-00\'
 				);',
+            array($patientId)
+        );
+    }
+
+    public function getPatientDiagnosisByPatientId($patientId)
+    {
+        return sqlStatement(
+            'SELECT diagnosis, begdate, title, date 
+            FROM lists
+            WHERE `type` = \'medical_problem\'
+                AND pid = ?
+                AND erx_source = \'0\'
+                AND erx_uploaded = \'0\'
+                ;',
             array($patientId)
         );
     }
@@ -278,7 +291,6 @@ class eRxStore
 				AND erx_uploaded = \'0\'
 				AND (? = 0
 					OR (enddate IS NULL
-						OR enddate = \'\'
 						OR enddate = \'0000-00-00\'
 						)
 					)
@@ -561,7 +573,6 @@ class eRxStore
 				AND title = ?
 				AND (
 					enddate IS NULL
-					OR enddate = \'\'
 					OR enddate = \'0000-00-00\'
 				);',
             array(
@@ -691,7 +702,6 @@ class eRxStore
 				AND erx_source = \'1\'
 				AND (
 					enddate IS NULL
-						OR enddate = \'\'
 						OR enddate = \'0000-00-00\'
 				);',
             array($patientId)
