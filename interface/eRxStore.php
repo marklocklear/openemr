@@ -165,8 +165,6 @@ class eRxStore
             FROM lists
             WHERE `type` = \'medical_problem\'
                 AND pid = ?
-                AND erx_source = \'0\'
-                AND erx_uploaded = \'0\'
                 ;',
             array($patientId)
         );
